@@ -2,6 +2,8 @@
 
 Demo project for testing [Devless](https://github.com/typekpb/devless) — an autonomous dev agent that picks up GitHub issues and ships PRs.
 
+Live demo: https://typekpb.github.io/devless-demo/
+
 ## How to use
 
 1. Open a GitHub issue describing a feature or bug fix
