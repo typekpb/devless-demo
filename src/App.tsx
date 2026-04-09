@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import TicTacToe from './components/TicTacToe'
+import React from 'react';
+import './App.css';
+import TicTacToe from './components/TicTacToe';
 
 function App() {
   return (
@@ -10,4 +11,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
