@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const TicTacToe = () => {
+function TicTacToe() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState('X');
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     if (board[index] === null) {
       const newBoard = [...board];
       newBoard[index] = currentPlayer;
@@ -61,6 +61,6 @@ const TicTacToe = () => {
       )}
     </div>
   );
-};
+}
 
 export default TicTacToe;
