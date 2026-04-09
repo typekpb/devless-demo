@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
 
-test('renders the get started heading', () => {
+test('renders the tic-tac-toe game', () => {
   render(<App />)
-  expect(screen.getByText('Get started')).toBeInTheDocument()
+  expect(screen.getByText('Tic Tac Toe')).toBeInTheDocument()
+  expect(screen.getByText('Player X wins!')).not.toBeInTheDocument()
+  expect(screen.getByText('It\'s a tie!')).not.toBeInTheDocument()
 })
