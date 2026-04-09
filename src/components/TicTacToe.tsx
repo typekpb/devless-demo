@@ -13,52 +13,52 @@ const TicTacToe: React.FC = () => {
     }
   };
 
-  const renderSquare = (index: number) => (
-    <div
-      className="square"
-      onClick={() => handleClick(index)}
-      style={{
-        width: '50px',
-        height: '50px',
-        border: '1px solid black',
-        display: 'inline-block',
-        textAlign: 'center',
-        lineHeight: '50px',
-        fontSize: '24px',
-        cursor: 'pointer',
-      }}
-    >
-      {board[index]}
-    </div>
-  );
+  const checkWinner = () => {
+    const winningLines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (let i = 0; i < winningLines.length; i++) {
+      const [a, b, c] = winningLines[i];
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        return board[a];
+      }
+    }
+
+    if (board.every((cell) => cell !== null)) {
+      return 'tie';
+    }
+
+    return null;
+  };
+
+  const winner = checkWinner();
 
   return (
-    <div
-      style={{
-        marginTop: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <div>
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
+    <div className="tic-tac-toe">
+      <div className="board">
+        {board.map((cell, index) => (
+          <div
+            key={index}
+            className={`cell ${cell === 'X' ? 'x' : cell === 'O' ? 'o' : ''}`}
+            onClick={() => handleClick(index)}
+          >
+            {cell}
+          </div>
+        ))}
       </div>
-      <div>
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div>
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-      <div style={{ marginTop: '10px' }}>
-        Current player: {currentPlayer}
-      </div>
+      {winner && (
+        <div className="result">
+          {winner === 'tie' ? 'It\'s a tie!' : `Player ${winner} wins!`}
+        </div>
+      )}
     </div>
   );
 };
