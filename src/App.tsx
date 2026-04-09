@@ -4,6 +4,9 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+// Import the tic-tac-toe game component
+import TicTacToe from './components/TicTacToe'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -114,6 +117,9 @@ function App() {
 
       <div className="ticks"></div>
       <section id="spacer"></section>
+
+      {/* Add the tic-tac-toe game component */}
+      <TicTacToe />
     </>
   )
 }
