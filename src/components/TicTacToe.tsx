@@ -1,66 +1,52 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-function TicTacToe() {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState('X');
+interface Square {
+  value: 'X' | 'O' | null;
+}
+
+const TicTacToe: React.FC = () => {
+  const [squares, setSquares] = useState<Square[]>(Array(9).fill({ value: null }));
+  const [isXNext, setIsXNext] = useState(true);
 
   const handleClick = (index: number) => {
-    if (board[index] === null) {
-      const newBoard = [...board];
-      newBoard[index] = currentPlayer;
-      setBoard(newBoard);
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    if (squares[index].value === null) {
+      const newSquares = [...squares];
+      newSquares[index] = { value: isXNext ? 'X' : 'O' };
+      setSquares(newSquares);
+      setIsXNext(!isXNext);
     }
   };
 
-  const checkWinner = () => {
-    const winningLines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-
-    for (let i = 0; i < winningLines.length; i++) {
-      const [a, b, c] = winningLines[i];
-      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        return board[a];
-      }
-    }
-
-    if (board.every((square) => square !== null)) {
-      return 'tie';
-    }
-
-    return null;
-  };
-
-  const winner = checkWinner();
-
-  return (
-    <div className="tic-tac-toe">
-      <div className="board">
-        {board.map((square, index) => (
-          <div
-            key={index}
-            className={`square ${square === 'X' ? 'x' : square === 'O' ? 'o' : ''}`}
-            onClick={() => handleClick(index)}
-          >
-            {square}
-          </div>
-        ))}
-      </div>
-      {winner && (
-        <div className="result">
-          {winner === 'tie' ? 'It\'s a tie!' : `Player ${winner} wins!`}
-        </div>
-      )}
+  const renderSquare = (index: number) => (
+    <div
+      className={`square ${squares[index].value === 'X' ? 'x' : squares[index].value === 'O' ? 'o' : ''}`}
+      onClick={() => handleClick(index)}
+    >
+      {squares[index].value}
     </div>
   );
-}
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <div className="board-row">
+          {renderSquare(0)}
+          {renderSquare(1)}
+          {renderSquare(2)}
+        </div>
+        <div className="board-row">
+          {renderSquare(3)}
+          {renderSquare(4)}
+          {renderSquare(5)}
+        </div>
+        <div className="board-row">
+          {renderSquare(6)}
+          {renderSquare(7)}
+          {renderSquare(8)}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default TicTacToe;
