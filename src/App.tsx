@@ -7,6 +7,7 @@ const App: React.FC = () => {
   return (
     <div className="app">
       {isPublishedPage && <TicTacToe />}
+      <h1>Get started</h1>
       {/* Other components */}
     </div>
   );
