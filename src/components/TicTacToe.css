@@ -29,7 +29,7 @@
   }
 
   &.x {
-    color: var(--accent);
+    color: red;
   }
 
   &.o {
